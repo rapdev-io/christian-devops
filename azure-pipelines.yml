@@ -21,7 +21,8 @@ stages:
     - job: 'Unit_Tests'
       steps:
       - script: echo Unit Tests
-    - job: Checkmarx_Scan
+    - job: 'Checkmarx_Scan'
+      dependsOn: 'Unit_Tests'
       steps:
       - script: echo Checkmarx Scan
 
@@ -31,5 +32,6 @@ stages:
       steps:
       - script: echo UAT Deploy
     - job: 'Production_Deploy'
+      dependsOn: 'UAT_Deploy'
       steps:
       - script: echo Production Deploy
