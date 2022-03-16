@@ -15,7 +15,21 @@ stages:
     - job: 'Build'
       steps:
       - script: echo Build
-      
+      - task: ServiceNow-DevOps-Agent-Artifact-Registration@1
+        inputs:
+          connectedServiceName: 'DevOps Connection'
+          artifactsPayload: |
+            {
+               "artifacts": [
+                  {
+                     "name": "Any Value",
+                     "version": "1.$(Build.BuildId)",
+                     "semanticVersion": "1.$(Build.BuildId).0",
+                     "repositoryName": "Any Name"
+                  }
+               ]
+            }
+
 - stage: 'Test'
   jobs:
     - job: 'Unit_Tests'
