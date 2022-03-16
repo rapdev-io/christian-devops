@@ -45,6 +45,20 @@ stages:
     - job: 'UAT_Deploy'
       steps:
       - script: echo UAT Deploy
+      - task: ServiceNow-DevOps-Agent-Package-Registration@1
+        inputs:
+          connectedServiceName: 'dev92233-Christian DevOps-ServiceNow DevOps Service Connection'
+          packageName: 'Anything'
+          artifactsPayload: |
+            {
+                "artifacts": [
+                {
+                    "name": "Any Value",
+                    "repositoryName": "Any Name",
+                    "version": "1.$(build.buildId)",
+                    "currentBuildInfo": "true"
+                }]
+            }
     - job: 'Production_Deploy'
       dependsOn: 'UAT_Deploy'
       steps:
