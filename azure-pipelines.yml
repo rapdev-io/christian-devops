@@ -41,7 +41,7 @@ stages:
             NOW=$(date +"%Y-%m-%dT%T-0500")
             testPayload='{"name":"Test-summary-1.$(Build.BuildId).0","duration":0.0,"passedTests":10,"failedTests":1,"skippedTests":0,"blockedTests":0,"totalTests":11,"startTime":"'$NOW'","finishTime":"'$NOW'","artifacts":[{"name":"Any Value","version":"1.$(Build.BuildId)"}]}'
             echo $testPayload
-            curl -X POST -H 'Content-Type: application/json' -u 'devops.integration.user:Dev0psYo'  -d $testPayload 'https://dev92233.service-now.com/api/sn_devops/v1/devops/tool/test?orchestrationToolId=c52f70192f920110e633ffecf699b697'
+            curl -X POST -H 'Content-Type: application/json' -u 'devops.integration.user:Dev0psYo'  -d $testPayload 'https://dev92233.service-now.com/api/sn_devops/v1/devops/tool/{code | plan | artifact | orchestration | test | softwarequality }?toolId=c52f70192f920110e633ffecf699b697
     - job: 'Checkmarx_Scan'
       dependsOn: 'Unit_Tests'
       steps:
